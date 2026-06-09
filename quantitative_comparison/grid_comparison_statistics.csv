@@ -1,0 +1,6 @@
+Metric,Value
+Pearson Correlation (r),0.3263657815815986
+Spearman Rank Correlation (rho),0.234514653953694
+RMSE (mW/m²),11.874275824352907
+MAE (mW/m²),9.600226511382628
+Mean Bias (mW/m²),-6.4937822548399895
