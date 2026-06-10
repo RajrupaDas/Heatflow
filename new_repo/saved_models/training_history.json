@@ -1,0 +1,15 @@
+{
+    "dataset_source": "master_boreholes_stage5.parquet",
+    "total_samples": 671,
+    "train_samples": 571,
+    "val_samples": 100,
+    "lambda_physics_regularization": 0.05,
+    "network_hyperparameters": {
+        "hidden_size": 256,
+        "depth_blocks": 4,
+        "learning_rate": 0.001,
+        "weight_decay": 0.0001,
+        "batch_size": 64
+    },
+    "best_val_loss_achieved": 23.434825820922853
+}

@@ -1,0 +1,45 @@
+# ==============================================================================
+# Geothermal Heat-Flow Prediction PINN Model Configuration
+# Target Objective: Direct Surface Heat Flow (mW/m²) Prediction Across India
+# Regularization: Spatial Laplacian Smoothness Penalty (∇²q) via Autograd
+# ==============================================================================
+
+# Model Architecture Configuration
+model:
+  hidden_dim: 256            # Size of the hidden layer projections
+  num_blocks: 4              # Number of pre-activation ResNet blocks
+  dropout_rate: 0.05         # Regularization dropout within residual layers
+  categorical_embeddings:
+    dimension_strategy: "auto" # Dynamically maps embedding_dims to max(4, ceil(cardinality / 2))
+
+# Optimization Parameters
+optimizer:
+  learning_rate: 1e-04      # Initial learning rate for optimization trajectory
+  weight_decay: 1e-05       # AdamW decoupled weight decay (L2 regularization)
+  batch_size: 128           # Sample count per gradient update iteration
+
+# Training Loop Controls
+training:
+  epochs: 3000              # Maximum continuous epoch budget allocation
+  patience: 300             # Validation early stopping monitoring ceiling window
+  min_delta: 1e-04          # Minimum validation threshold improvements required
+  validation_split: 0.15    # Evaluation partition ratio out of master dataset
+
+# Physics Informed Constraint Parameters
+physics:
+  lambda_physics: 1.0     # Multiplier penalty weight for Laplacian smoothness loss
+  pde_regularization:       # Enforced rule equation definition: mean((∇²q)^2)
+    track_gradients: true
+    coordinate_mapping:
+      lat_index: 0
+      lon_index: 1
+
+# IO Data Handling Configurations
+data:
+  training_dataset: "master_boreholes_stage5.parquet"
+  inference_grid: "national_feature_grid.parquet"
+  output_dir: "saved_models"
+  log_dir: "runs/geothermal_pinn"
+  preprocessor_filename: "geothermal_preprocessor.joblib"
+  checkpoint_filename: "pinn_best_model.pt"
+  inference_output_filename: "india_predicted_surface_heat_flow.csv"
