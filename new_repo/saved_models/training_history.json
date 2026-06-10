@@ -11,5 +11,5 @@
         "weight_decay": 0.0001,
         "batch_size": 64
     },
-    "best_val_loss_achieved": 23.434825820922853
+    "best_val_loss_achieved": 24.333277187347413
 }

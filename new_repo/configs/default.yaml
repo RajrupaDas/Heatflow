@@ -27,7 +27,7 @@ training:
 
 # Physics Informed Constraint Parameters
 physics:
-  lambda_physics: 1.0     # Multiplier penalty weight for Laplacian smoothness loss
+  lambda_physics: 2.0     # Multiplier penalty weight for Laplacian smoothness loss
   pde_regularization:       # Enforced rule equation definition: mean((∇²q)^2)
     track_gradients: true
     coordinate_mapping:
